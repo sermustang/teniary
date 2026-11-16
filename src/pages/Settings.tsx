@@ -5,11 +5,19 @@ import { IconAlert, IconCheck, IconImport, IconShare } from '../components/Icons
 import { exportNotes, parseBackup } from '../backup/backup'
 import { formatTimestampDate, pluralize } from '../model/format'
 import { useAppState } from '../state'
+import { setThemePref, useTheme, type ThemePref } from '../theme'
 
 type Message = { tone: 'success' | 'error'; text: string } | null
 
+const THEME_OPTIONS: { value: ThemePref; label: string }[] = [
+  { value: 'auto', label: 'Automático' },
+  { value: 'light', label: 'Claro' },
+  { value: 'dark', label: 'Oscuro' },
+]
+
 export function Settings() {
   const { status, notes, persistent, lastExportAt, importNotes, markExported } = useAppState()
+  const { pref: themePref } = useTheme()
   const [message, setMessage] = useState<Message>(null)
   const [busy, setBusy] = useState(false)
   const fileInput = useRef<HTMLInputElement>(null)
@@ -119,6 +127,24 @@ export function Settings() {
             onChange={(e) => onFileChosen(e.target.files?.[0])}
           />
           <p className="muted small">Importar añade las notas del archivo y actualiza las que ya tienes. Nunca borra nada.</p>
+        </section>
+
+        <section className="card">
+          <h2 className="card-title">Apariencia</h2>
+          <div className="segmented segmented-3" role="group" aria-label="Tema">
+            {THEME_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                className={`segment${themePref === option.value ? ' is-selected' : ''}`}
+                aria-pressed={themePref === option.value}
+                onClick={() => setThemePref(option.value)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+          <p className="muted small">«Automático» usa el mismo modo claro u oscuro que el iPhone.</p>
         </section>
 
         <section className="card card-rows">

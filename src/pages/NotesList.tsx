@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { InstallHint } from '../components/Banners'
 import { DateField } from '../components/DateField'
 import { IconChevronDown, IconPlus, IconSearch, IconSettings, IconSliders } from '../components/Icons'
+import { ThemeToggle } from '../components/ThemeToggle'
 import { activeFilterCount, EMPTY_FILTERS, filterNotes, groupByMonth, sortNotes } from '../model/filter'
 import { dayBlock, formatDateLong, pluralize } from '../model/format'
 import { SURFACES, surfaceInfo, type Note, type Surface } from '../model/note'
@@ -27,9 +28,12 @@ export function NotesList() {
           <h1>Teniary</h1>
           <p>{status === 'ready' ? `${pluralize(notes.length, 'partido guardado', 'partidos guardados')}` : ' '}</p>
         </div>
-        <Link to="/ajustes" className="round-btn" aria-label="Ajustes">
-          <IconSettings size={22} />
-        </Link>
+        <div className="header-actions">
+          <ThemeToggle />
+          <Link to="/ajustes" className="round-btn" aria-label="Ajustes">
+            <IconSettings size={22} />
+          </Link>
+        </div>
       </header>
 
       <InstallHint />

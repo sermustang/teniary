@@ -1,8 +1,11 @@
 /* Teniary — colors come from the app icon: lime #BEFF00, magenta #E60094
    (darkened to #D10087 so white text on it stays readable). */
 
+/* The theme is set on <html data-theme="light|dark"> by src/theme.ts (and by
+   the inline script in index.html before the first paint): either the
+   user's choice or the system setting. */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --bg: #f3f4ef;
   --card: #ffffff;
   --ink: #141414;
@@ -28,30 +31,29 @@
   --fab-shadow: 0 6px 16px rgba(209, 0, 135, 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f100d;
-    --card: #1b1c18;
-    --ink: #f2f3ee;
-    --muted: #a7aa9f;
-    --line: #2c2e27;
-    --line-soft: #262822;
-    --field: #24261f;
-    --field-line: #3a3d34;
-    --dashed: #4a4d43;
-    --pink-ink: #ff5cc0;
-    --lime-soft: #2b3a06;
-    --lime-line: #4a6300;
-    --loss: #3a3c35;
-    --danger: #ff8a80;
-    --danger-line: #5a2a2a;
-    --error-soft: #3a1b1b;
-    --focus: #5cc4ff;
-    --meter-off: #30322b;
-    --hint-bg: #1f2a05;
-    --appbar-bg: rgba(15, 16, 13, 0.92);
-    --fab-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
-  }
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0f100d;
+  --card: #1b1c18;
+  --ink: #f2f3ee;
+  --muted: #a7aa9f;
+  --line: #2c2e27;
+  --line-soft: #262822;
+  --field: #24261f;
+  --field-line: #3a3d34;
+  --dashed: #4a4d43;
+  --pink-ink: #ff5cc0;
+  --lime-soft: #2b3a06;
+  --lime-line: #4a6300;
+  --loss: #3a3c35;
+  --danger: #ff8a80;
+  --danger-line: #5a2a2a;
+  --error-soft: #3a1b1b;
+  --focus: #5cc4ff;
+  --meter-off: #30322b;
+  --hint-bg: #1f2a05;
+  --appbar-bg: rgba(15, 16, 13, 0.92);
+  --fab-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
 }
 
 /* ---------- Base ---------- */
@@ -282,6 +284,12 @@ p {
 .list-header-text p {
   font-size: 14px;
   color: var(--muted);
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .round-btn {
@@ -806,6 +814,16 @@ p {
   align-items: center;
   justify-content: center;
   gap: 6px;
+}
+
+.segmented-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.segment.is-selected {
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .segment.is-win {

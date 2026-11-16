@@ -40,6 +40,7 @@ lime `#BEFF00`) and the manifest icons.
 | `src/db/db.ts` | IndexedDB storage (`teniary` database) |
 | `src/backup/backup.ts` | Export/import file format and merge |
 | `src/state.tsx` | App state shared by all screens |
+| `src/theme.ts` | Light/dark theme: system setting or the user's choice (stored in `localStorage`) |
 | `src/pages/` | List, form, note view, settings |
 
 ### Changing the note format later
